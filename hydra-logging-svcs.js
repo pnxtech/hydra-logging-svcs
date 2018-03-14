@@ -1,6 +1,6 @@
 /**
 * @name HLS Service
-* @summary User Hydra  service entry point
+* @summary User Hydra service entry point
 * @description Hydra Logging Service
 */
 const url = require('url');
@@ -29,6 +29,7 @@ let main = async () => {
         await mdb.open(config.logger.mongodb.connectionString);
       } catch (e) {
         console.log(e);
+        await hydra.shutdown();
         process.exit(1);
       }
     }
