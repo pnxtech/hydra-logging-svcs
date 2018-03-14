@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "node hls-svcs.js",
+    "start": "node hydra-logging-svcs.js",
     "test": "mocha specs --reporter spec"
   },
   "engines": {
