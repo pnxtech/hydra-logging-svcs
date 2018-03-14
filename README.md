@@ -1,7 +1,7 @@
 # hydra-logging-svcs
 Hydra Logging Service
 
-A logging service for Hydra-enabled services.
+A logging service for Hydra-enabled services which use the [hydra-plugin-hls](https://github.com/cjus/hydra-plugin-hls) module.
 
 ## Logging to terminal
 
