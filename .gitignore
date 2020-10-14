@@ -3,4 +3,5 @@
 node_modules
 .vscode
 scratch.*
+package-lock.json
 
