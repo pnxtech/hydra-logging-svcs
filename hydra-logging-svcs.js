@@ -9,7 +9,6 @@ const hydra = require('hydra');
 const ServerResponse = hydra.getServerResponseHelper();
 let serverResponse = new ServerResponse();
 const Logger = require('./lib/logger');
-const mdb = require('./lib/mdb');
 
 /**
  * @name main
@@ -23,16 +22,6 @@ let main = async () => {
 
     let logEntry = `Starting service ${serviceInfo.serviceName}:${hydra.getInstanceVersion()} on ${serviceInfo.serviceIP}:${serviceInfo.servicePort}`;
     console.log(logEntry);
-
-    if (config.logger.logToDB) {
-      try {
-        await mdb.open(config.logger.mongodb.connectionString);
-      } catch (e) {
-        console.log(e);
-        await hydra.shutdown();
-        process.exit(1);
-      }
-    }
 
     let server = http.createServer((req, res) => {
       let urlData = url.parse(req.url);

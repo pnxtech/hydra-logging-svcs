@@ -1,13 +1,19 @@
 {
   "logger": {
-    "logToDB": true,
+    "logToFile": true,
     "logToConsole": true,
-    "mongodb": {
-      "connectionString": "mongodb://host:27017/hls"
+    "config": {
+      "name": "hls",
+      "streams": [
+        {
+          "level": "debug",
+          "path": "/logs/hls.log"
+        }
+      ]
     }
   },
   "hydra": {
-    "serviceName": "hydra-logging-service",
+    "serviceName": "hydra-logging-svcs",
     "serviceIP": "",
     "servicePort": 12000,
     "serviceType": "logging",
