@@ -12,6 +12,10 @@ HLS is light-weight and doesn't utilize a database, instead it simply logs to a 
 ## Use with Docker
 The recommended use of HLS is as a docker container in a docker swarm or Kubernetes cluster.
 
+`docker pull pnxtech/hydra-logging-svcs:0.3.4`
+
+Visit the docker hub [repo](https://hub.docker.com/repository/registry-1.docker.io/pnxtech/hydra-logging-svcs/tags?page=1
+) for other versions.
 
 ## Configuration
 #### Logging to terminal
