@@ -1,4 +1,7 @@
 # hydra-logging-svcs
+
+![](hydra-logging-svcs-logo.png)
+
 Hydra Logging Service (HLS)
 
 A logging service for Hydra-enabled services which use the [hydra-plugin-hls](https://github.com/pnxtech/hydra-plugin-hls) module or directly send UMF messages.
@@ -8,6 +11,8 @@ HLS is a distributed logging service intended to aggrigate log entries for runni
 Log entries are posted using Hydra's underlying Redis Pub/Sub channels which are socket streams that are more efficient since they don't rely on HTTP.
 
 HLS is light-weight and doesn't utilize a database, instead it simply logs to a file using [Bunyan](https://www.npmjs.com/package/bunyan), a simple and fast JSON logging library.  You can use the Bunyan command line tool to inspects logs or the [bunext](https://www.npmjs.com/package/bunext) tool which supports log queries.
+
+> **Bonus Tip:** bunyan and bunext output is compatible with the excellent [jq](https://stedolan.github.io/jq/) tool for advanced JSON queries and syntax highlighting.
 
 ## Use with Docker
 The recommended use of HLS is as a docker container in a docker swarm or Kubernetes cluster.
