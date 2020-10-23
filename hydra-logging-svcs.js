@@ -46,17 +46,6 @@ let main = async () => {
     logger.init(config.logger);
     hydra.on('message', (msg) => {
       logger.process(msg);
-      entriesProcessed++;
-      logger.process({
-        bdy: {
-        serviceName: serviceInfo.serviceName,
-        serviceVersion: hydra.getInstanceVersion(),
-        instanceID: hydra.getInstanceID(),
-        severity: 'info',
-        bdy: {
-          entriesProcessed
-        }
-      }});
     });
 
     logger.process({
