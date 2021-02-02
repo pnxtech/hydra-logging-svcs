@@ -2,6 +2,9 @@
   "logger": {
     "logToFile": true,
     "logToConsole": true,
+    "useGCPBunyanLogger": false,
+    "GCPProjectId": "",
+    "GCPCredentialsKeyPath": "",
     "config": {
       "name": "hls",
       "streams": [

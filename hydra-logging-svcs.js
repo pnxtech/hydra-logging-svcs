@@ -16,7 +16,6 @@ const Logger = require('./lib/logger');
  * @return {undefined}
  */
 let main = async () => {
-  let entriesProcessed = 0;
   try {
     let config = await hydra.init(`${__dirname}/config/config.json`, false);
     let serviceInfo = await hydra.registerService();
@@ -50,12 +49,13 @@ let main = async () => {
 
     logger.process({
       bdy: {
-      serviceName: serviceInfo.serviceName,
-      serviceVersion: hydra.getInstanceVersion(),
-      instanceID: hydra.getInstanceID(),
-      severity: 'info',
-      bdy: logEntry
-    }});
+        serviceName: serviceInfo.serviceName,
+        serviceVersion: hydra.getInstanceVersion(),
+        instanceID: hydra.getInstanceID(),
+        severity: 'info',
+        bdy: logEntry
+      }
+    });
   } catch (err) {
     console.log('err', err);
   }
