@@ -1,6 +1,6 @@
 {
   "name": "hydra-logging-svcs",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "private": true,
   "scripts": {
     "start": "node hydra-logging-svcs.js",
@@ -14,7 +14,7 @@
     "@google-cloud/logging-bunyan": "^3.0.1",
     "bunyan": "1.8.14",
     "chalk": "4.1.0",
-    "hydra": "1.8.2"
+    "hydra": "1.8.3"
   },
   "devDependencies": {
     "chai": "3.5.0",
