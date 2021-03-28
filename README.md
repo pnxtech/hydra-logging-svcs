@@ -74,7 +74,7 @@ configs:
 ```yaml
 services:
   hydra-logging-svcs:
-    image: hydra-logging-svcs:0.3.0
+    image: hydra-logging-svcs:0.4.3
     networks:
       - servicenet
     depends_on:
@@ -90,3 +90,106 @@ services:
 
 Note the use of the `volumes` branch above to denote that logs will be mapped and written to the outside of the container / cluster.
 
+## Sample K8s config.yaml
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hydra-logging-svcs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: hydra-logging-svcs
+  template:
+    metadata:
+      labels:
+        component: hydra-logging-svcs
+    spec:
+      containers:
+        - name: hydra-logging-svcs
+          image: pnxtech/hydra-logging-svcs:0.4.3
+          # resources:
+          #   limits:
+          #     cpu: "1"
+          #     memory: "128Mi"
+          #   requests:
+          #     cpu: "0.5"
+          #     memory: "64Mi"
+          ports:
+            - containerPort: 12000
+          volumeMounts:
+            - name: hydra-logging-svcs-config-volume
+              mountPath: /usr/src/app/config
+            - name: hydra-logging-svcs-data-volume
+              mountPath: /var/log
+      volumes:
+        - name: hydra-logging-svcs-config-volume
+          configMap:
+            name: hydra-logging-svcs-config
+        - name: hydra-logging-svcs-data-volume
+          hostPath:
+            path: /Volumes/hydra-logging
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hydra-logging-svcs-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: hydra-logging-svcs
+  ports:
+    - port: 12000
+      targetPort: 12000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hydra-logging-svcs-config
+data:
+  config.json: |-
+    {
+      "logger": {
+        "logToFile": true,
+        "logToConsole": true,
+        "config": {
+          "name": "hls",
+          "streams": [
+            {
+              "level": "trace",
+              "path": "/var/log/hls.log"
+            }
+          ]
+        }
+      },
+      "hydra": {
+        "serviceName": "hydra-logging-svcs",
+        "serviceIP": "",
+        "servicePort": 12000,
+        "serviceType": "logging",
+        "serviceDescription": "Hydra Logging Service",
+        "redis": {
+          "url": "redis://redis-cluster-ip-service:6379/0"
+        }
+      }
+    }
+```
+
+## Also see
+Consider using Frontail to view and query logs in your browser.
+
+https://github.com/mthenw/frontail
+
+Local installation is simple:
+
+```shell
+$ npm i frontail -g
+$ frontail /Volumes/hydra-logging/hls.log
+```
+
+Just point frontail to the location of the hydra logging hls.log file.
+
+Then access via http://localhost:9001  and trying the filter text box on the upper right!
