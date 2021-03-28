@@ -92,7 +92,7 @@ Note the use of the `volumes` branch above to denote that logs will be mapped an
 
 ## Sample K8s config.yaml
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
