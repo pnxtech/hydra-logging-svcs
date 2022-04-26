@@ -2,9 +2,10 @@ FROM node:12-alpine
 LABEL maintainer="Carlos Justiniano cjus@ieee.org"
 EXPOSE 12000
 #HEALTHCHECK --interval=5s --timeout=3s CMD curl -f http://localhost:12000/v1/hls/health || exit 1
-RUN apk add --update \
+RUN apk -U upgrade \
+  && apk add --no-cache \
     curl \
-    python \
+    python3 \
     build-base \
   && rm -rf /var/cache/apk/*
 RUN mkdir -p /logs
