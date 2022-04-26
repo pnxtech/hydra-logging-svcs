@@ -58,6 +58,7 @@ let main = async () => {
     });
   } catch (err) {
     console.log('err', err);
+    process.exit(1);
   }
 };
 
