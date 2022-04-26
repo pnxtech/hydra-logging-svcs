@@ -43,10 +43,6 @@ let main = async () => {
 
     let logger = new Logger();
     logger.init(config.logger);
-    hydra.on('message', (msg) => {
-      logger.process(msg);
-    });
-
     logger.process({
       bdy: {
         serviceName: serviceInfo.serviceName,
@@ -55,6 +51,9 @@ let main = async () => {
         severity: 'info',
         bdy: logEntry
       }
+    });
+    hydra.on('message', (msg) => {
+      logger.process(msg);
     });
   } catch (err) {
     console.log('err', err);
