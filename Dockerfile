@@ -7,7 +7,6 @@ RUN apk -U upgrade \
     curl \
     python3 \
     build-base \
-  && rm -rf /var/cache/apk/*
 RUN mkdir -p /logs
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
