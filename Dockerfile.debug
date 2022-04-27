@@ -4,8 +4,7 @@ EXPOSE 12000
 RUN apk -U upgrade \
   && apk add --no-cache \
     curl \
-    python3 \
-    build-base \
+    build-base
 RUN mkdir -p /logs
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
